@@ -10,7 +10,7 @@
       <jhi-alert></jhi-alert>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="currentweather">
     <div class="col-12">
       <jhi-weather-card
         [temp]="currentweather.temp"

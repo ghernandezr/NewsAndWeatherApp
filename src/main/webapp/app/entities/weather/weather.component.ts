@@ -12,7 +12,7 @@ import * as moment from 'moment';
   templateUrl: './weather.component.html',
 })
 export class WeatherComponent implements OnInit, OnDestroy {
-  currentweather: IWeather;
+  currentweather?: IWeather;
   forecastWeather: IWeather[];
   eventSubscriber?: Subscription;
 
@@ -21,12 +21,12 @@ export class WeatherComponent implements OnInit, OnDestroy {
     protected weatherService: WeatherService,
     protected eventManager: JhiEventManager
   ) {
-    this.currentweather = new Weather();
     this.forecastWeather = [];
   }
 
   loadAll(): void {
     this.weatherService.query('London', 'uk', this.languajeService.currentLang).subscribe((response: any) => {
+      this.currentweather = new Weather();
       this.currentweather.date = moment();
       this.currentweather.temp = new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 2,
@@ -37,6 +37,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
     });
 
     this.weatherService.forecast('London', 'uk', this.languajeService.currentLang).subscribe((response: any) => {
+      this.forecastWeather = [];
       if (response.list && response.list.length) {
         response.list.forEach((item: any) => {
           const fw = new Weather();
