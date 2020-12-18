@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 
 /**
  * A City.
@@ -22,6 +23,12 @@ public class City implements Serializable {
 
     @Field("country_code")
     private String countryCode;
+
+    @Field("updated")
+    private ZonedDateTime updated;
+
+    @Field("registered")
+    private ZonedDateTime registered;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public String getId() {
@@ -58,6 +65,23 @@ public class City implements Serializable {
         this.countryCode = countryCode;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+
+    public ZonedDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(ZonedDateTime updated) {
+        this.updated = updated;
+    }
+
+    public ZonedDateTime getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(ZonedDateTime registered) {
+        this.registered = registered;
+    }
 
     @Override
     public boolean equals(Object o) {

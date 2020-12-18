@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "_id": "5a0d7b2c4141d016c4eba355",
+      "name": "Juan Gutierrez No existo",
+      "email": "juan@correo.com",
+      "phone": "+53034262"
+    },
+    {
+      "_id": "5a0d7af14141d016c4eba352",
+      "name": "Donald Trump",
+      "email": "trump@correo.com",
+      "phone": "+15689234"
+    },
+    {
+      "_id": "5a0d7a494141d016c4eba34e",
+      "name": "Risto Mejides",
+      "email": "risto@correo.com",
+      "phone": "+7564523145698"
+    }
+  ]
+}

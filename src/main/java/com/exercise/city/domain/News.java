@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 /**
  * A News.
@@ -33,6 +34,12 @@ public class News implements Serializable {
     @Field("create_at")
     private LocalDate createAt;
 
+    @Field("updated")
+    private ZonedDateTime updated;
+
+    @Field("registered")
+    private ZonedDateTime registered;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public String getId() {
         return id;
@@ -46,17 +53,21 @@ public class News implements Serializable {
         return authorId;
     }
 
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
+    }
+
     public News authorId(String authorId) {
         this.authorId = authorId;
         return this;
     }
 
-    public void setAuthorId(String authorId) {
-        this.authorId = authorId;
-    }
-
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public News title(String title) {
@@ -64,12 +75,12 @@ public class News implements Serializable {
         return this;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public News description(String description) {
@@ -77,12 +88,12 @@ public class News implements Serializable {
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getCityId() {
         return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
     }
 
     public News cityId(String cityId) {
@@ -90,23 +101,45 @@ public class News implements Serializable {
         return this;
     }
 
-    public void setCityId(String cityId) {
-        this.cityId = cityId;
-    }
-
     public LocalDate getCreateAt() {
         return createAt;
+    }
+
+    public void setCreateAt(LocalDate createAt) {
+        this.createAt = createAt;
     }
 
     public News createAt(LocalDate createAt) {
         this.createAt = createAt;
         return this;
     }
-
-    public void setCreateAt(LocalDate createAt) {
-        this.createAt = createAt;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+    public ZonedDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(ZonedDateTime updated) {
+        this.updated = updated;
+    }
+
+    public News updated(ZonedDateTime updated) {
+        this.updated = updated;
+        return this;
+    }
+
+    public ZonedDateTime getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(ZonedDateTime registered) {
+        this.registered = registered;
+    }
+
+    public News registered(ZonedDateTime registered) {
+        this.registered = registered;
+        return this;
+    }
 
     @Override
     public boolean equals(Object o) {

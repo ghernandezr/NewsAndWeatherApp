@@ -17,7 +17,7 @@ logging:
   level:
     ROOT: DEBUG
     io.github.jhipster: DEBUG
-    com.exercise.city: DEBUG
+    com.exercise.city: INFO
 
 spring:
   profiles:
