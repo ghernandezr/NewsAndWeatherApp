@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 
 /**
  * A Author.
@@ -25,6 +26,12 @@ public class Author implements Serializable {
 
     @Field("phone")
     private String phone;
+
+    @Field("updated")
+    private ZonedDateTime updated;
+
+    @Field("registered")
+    private ZonedDateTime registered;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public String getId() {
@@ -74,6 +81,30 @@ public class Author implements Serializable {
         this.phone = phone;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+    public ZonedDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(ZonedDateTime updated) {
+        this.updated = updated;
+    }
+    public Author updated(ZonedDateTime updated) {
+        this.updated = updated;
+        return this;
+    }
+
+    public ZonedDateTime getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(ZonedDateTime registered) {
+        this.registered = registered;
+    }
+    public Author registered(ZonedDateTime registered) {
+        this.registered = registered;
+        return this;
+    }
 
     @Override
     public boolean equals(Object o) {

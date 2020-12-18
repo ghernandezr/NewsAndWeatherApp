@@ -1,14 +1,21 @@
 package com.exercise.city.config.dbmigrations;
 
-import com.exercise.city.domain.Authority;
-import com.exercise.city.domain.User;
+import com.exercise.city.domain.*;
 import com.exercise.city.security.AuthoritiesConstants;
-
 import com.github.mongobee.changeset.ChangeLog;
 import com.github.mongobee.changeset.ChangeSet;
+import com.google.gson.*;
+import org.apache.logging.log4j.LogManager;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
  * Creates the initial database setup.
@@ -22,6 +29,8 @@ public class InitialSetupMigration {
         adminAuthority.setName(AuthoritiesConstants.ADMIN);
         Authority userAuthority = new Authority();
         userAuthority.setName(AuthoritiesConstants.USER);
+        Authority visitorAuthority = new Authority();
+        visitorAuthority.setName(AuthoritiesConstants.ANONYMOUS);
         mongoTemplate.save(adminAuthority);
         mongoTemplate.save(userAuthority);
     }
@@ -33,20 +42,9 @@ public class InitialSetupMigration {
         Authority userAuthority = new Authority();
         userAuthority.setName(AuthoritiesConstants.USER);
 
-        User systemUser = new User();
-        systemUser.setId("user-0");
-        systemUser.setLogin("system");
-        systemUser.setPassword("$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG");
-        systemUser.setFirstName("");
-        systemUser.setLastName("System");
-        systemUser.setEmail("system@localhost");
-        systemUser.setActivated(true);
-        systemUser.setLangKey("es");
-        systemUser.setCreatedBy(systemUser.getLogin());
-        systemUser.setCreatedDate(Instant.now());
-        systemUser.getAuthorities().add(adminAuthority);
-        systemUser.getAuthorities().add(userAuthority);
-        mongoTemplate.save(systemUser);
+        Authority visitorAuthority = new Authority();
+        visitorAuthority.setName(AuthoritiesConstants.ANONYMOUS);
+
 
         User anonymousUser = new User();
         anonymousUser.setId("user-1");
@@ -54,12 +52,27 @@ public class InitialSetupMigration {
         anonymousUser.setPassword("$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO");
         anonymousUser.setFirstName("Anonymous");
         anonymousUser.setLastName("User");
-        anonymousUser.setEmail("anonymous@localhost");
+        anonymousUser.setEmail("anonymous@localhost.com");
         anonymousUser.setActivated(true);
         anonymousUser.setLangKey("es");
-        anonymousUser.setCreatedBy(systemUser.getLogin());
+        anonymousUser.setCreatedBy("adminDausbel");
         anonymousUser.setCreatedDate(Instant.now());
+        anonymousUser.getAuthorities().add(visitorAuthority);
         mongoTemplate.save(anonymousUser);
+
+        User visitor = new User();
+        visitor.setId("user-3");
+        visitor.setLogin("visitor");
+        visitor.setPassword("$2a$10$eGAiqNOa2iq6UGNElgJblOKvuQD5GK4HEZnbVRplfyezkegRkvGXy");
+        visitor.setFirstName("Visitor");
+        visitor.setLastName("User");
+        visitor.setEmail("visitor@localhost.com");
+        visitor.setActivated(true);
+        visitor.setLangKey("es");
+        visitor.setCreatedBy("adminDausbel");
+        visitor.setCreatedDate(Instant.now());
+        visitor.getAuthorities().add(visitorAuthority);
+        mongoTemplate.save(visitor);
 
         User adminUser = new User();
         adminUser.setId("user-2");
@@ -67,27 +80,88 @@ public class InitialSetupMigration {
         adminUser.setPassword("$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC");
         adminUser.setFirstName("admin");
         adminUser.setLastName("Administrator");
-        adminUser.setEmail("admin@localhost");
+        adminUser.setEmail("admin@localhost.com");
         adminUser.setActivated(true);
         adminUser.setLangKey("es");
-        adminUser.setCreatedBy(systemUser.getLogin());
+        adminUser.setCreatedBy("adminDausbel");
         adminUser.setCreatedDate(Instant.now());
         adminUser.getAuthorities().add(adminAuthority);
         adminUser.getAuthorities().add(userAuthority);
         mongoTemplate.save(adminUser);
+    }
 
-        User userUser = new User();
-        userUser.setId("user-3");
-        userUser.setLogin("user");
-        userUser.setPassword("$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K");
-        userUser.setFirstName("");
-        userUser.setLastName("User");
-        userUser.setEmail("user@localhost");
-        userUser.setActivated(true);
-        userUser.setLangKey("es");
-        userUser.setCreatedBy(systemUser.getLogin());
-        userUser.setCreatedDate(Instant.now());
-        userUser.getAuthorities().add(userAuthority);
-        mongoTemplate.save(userUser);
+    @ChangeSet(order = "03", author = "initiator", id = "03-addCities")
+    public void addDefaultCities(MongoTemplate repository) {
+        try {
+            executeSeedingFromJson("seeding/city.json", elem -> {
+                JsonObject seedEntry = elem.getAsJsonObject();
+                City cities = new City();
+                cities.setName(seedEntry.get("name").getAsString());
+                if (!Objects.isNull(seedEntry.get("_id"))) {
+                    cities.setId(seedEntry.get("_id").getAsString());
+                }
+                cities.setCountryCode(seedEntry.get("countryCode").getAsString());
+                cities.setRegistered(ZonedDateTime.now());
+                cities.setUpdated(ZonedDateTime.now());
+                repository.save(cities);
+            });
+        } catch (IOException ex) {
+            LogManager.getLogger(InitialSetupMigration.class).error("Default cities seeding fail", ex);
+        }
+    }
+
+    @ChangeSet(order = "04", author = "initiator", id = "04-addAuthor")
+    public void addDefaultAuthor(MongoTemplate repository) {
+        try {
+            executeSeedingFromJson("seeding/author.json", elem -> {
+                JsonObject seedEntry = elem.getAsJsonObject();
+                Author author = new Author();
+                author.setName(seedEntry.get("name").getAsString());
+                if (!Objects.isNull(seedEntry.get("_id"))) {
+                    author.setId(seedEntry.get("_id").getAsString());
+                }
+                author.setEmail(seedEntry.get("email").getAsString());
+                author.setPhone(seedEntry.get("phone").getAsString());
+                author.setRegistered(ZonedDateTime.now());
+                author.setUpdated(ZonedDateTime.now());
+                repository.save(author);
+            });
+        } catch (IOException ex) {
+            LogManager.getLogger(InitialSetupMigration.class).error("Default author seeding fail", ex);
+        }
+    }
+
+    @ChangeSet(order = "05", author = "initiator", id = "05-addNews")
+    public void addDefaultNews(MongoTemplate repository) {
+        try {
+            executeSeedingFromJson("seeding/news.json", elem -> {
+                JsonObject seedEntry = elem.getAsJsonObject();
+                News news = new News();
+                news.setAuthorId(seedEntry.get("authorId").getAsString());
+                if (!Objects.isNull(seedEntry.get("_id"))) {
+                    news.setId(seedEntry.get("_id").getAsString());
+                }
+                news.setTitle(seedEntry.get("title").getAsString());
+                news.setDescription(seedEntry.get("description").getAsString());
+                news.setCityId(seedEntry.get("cityId").getAsString());
+                news.setCreateAt(LocalDate.now());
+                news.setRegistered(ZonedDateTime.now());
+                news.setUpdated(ZonedDateTime.now());
+                repository.save(news);
+            });
+        } catch (IOException ex) {
+            LogManager.getLogger(InitialSetupMigration.class).error("Default news seeding fail", ex);
+        }
+    }
+
+    private void executeSeedingFromJson(String jsonPath, Consumer<JsonElement> seedingAction) throws IOException {
+        ClassPathResource cpr = new ClassPathResource(jsonPath);
+
+        Gson gson = new GsonBuilder()
+            .disableHtmlEscaping()
+            .create();
+        JsonElement je = gson.fromJson(new InputStreamReader(cpr.getInputStream()), JsonElement.class);
+        JsonArray data = je.getAsJsonObject().get("data").getAsJsonArray();
+        data.forEach(seedingAction);
     }
 }
