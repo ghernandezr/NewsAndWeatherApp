@@ -1,0 +1,90 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h2 id="page-heading">
+        <span jhiTranslate="cityNewsAndWeatherApp.news.home.title">News</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-news" [routerLink]="['/news/new']">
+          <fa-icon icon="plus"></fa-icon>
+          <span jhiTranslate="cityNewsAndWeatherApp.news.home.createLabel">
+            Create a new News
+          </span>
+        </button>
+      </h2>
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+      <div infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <jhi-news-card [news]="item" *ngFor="let item of news; trackBy: trackId"> </jhi-news-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="cityNewsAndWeatherApp.news.home.title">News</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-news" [routerLink]="['/news/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="cityNewsAndWeatherApp.news.home.createLabel">
+            Create a new News
+            </span>
+        </button>
+    </h2>
+
+   
+
+    <div class="alert alert-warning" id="no-result" *ngIf="news?.length === 0">
+        <span jhiTranslate="cityNewsAndWeatherApp.news.home.notFound">No news found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="news && news.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="authorId"><span jhiTranslate="cityNewsAndWeatherApp.news.authorId">Author Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="title"><span jhiTranslate="cityNewsAndWeatherApp.news.title">Title</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="description"><span jhiTranslate="cityNewsAndWeatherApp.news.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="cityId"><span jhiTranslate="cityNewsAndWeatherApp.news.cityId">City Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createAt"><span jhiTranslate="cityNewsAndWeatherApp.news.createAt">Create At</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let news of news ;trackBy: trackId">
+                    <td><a [routerLink]="['/news', news.id, 'view']">{{ news.id }}</a></td>
+                    <td>{{ news.authorId }}</td>
+                    <td>{{ news.title }}</td>
+                    <td>{{ news.description }}</td>
+                    <td>{{ news.cityId }}</td>
+                    <td>{{ news.createAt | date:'mediumDate' }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/news', news.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/news', news.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(news)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>-->

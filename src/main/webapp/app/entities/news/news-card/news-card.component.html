@@ -1,0 +1,18 @@
+<div class="card jh-card" *ngIf="news">
+  <div class="row">
+    <div class="col-10"><b>Alan Brito Prieto</b></div>
+    <div class="col-2 text-right">
+      <fa-icon icon="ellipsis-h"></fa-icon>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      {{ news.title }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 text-right">
+      {{ news.createAt | date }}
+    </div>
+  </div>
+</div>

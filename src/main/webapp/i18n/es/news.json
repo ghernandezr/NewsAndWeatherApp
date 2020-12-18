@@ -1,0 +1,26 @@
+{
+  "cityNewsAndWeatherApp": {
+    "news": {
+      "home": {
+        "title": "Noticias",
+        "createLabel": "Crear noticia",
+        "createOrEditLabel": "Crear o editar noticia",
+        "notFound": "Ningúna noticia encontrada"
+      },
+      "created": "Una nueva noticia ha sido creada con el identificador {{ param }}",
+      "updated": "Una noticia ha sido actualizada con el identificador {{ param }}",
+      "deleted": "Una noticia ha sido eliminada con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar la noticia {{ id }}?"
+      },
+      "detail": {
+        "title": "Noticias"
+      },
+      "authorId": "Autor",
+      "title": "Título",
+      "description": "Descripción",
+      "cityId": "Ciudad",
+      "createAt": "Fecha de Creación"
+    }
+  }
+}
