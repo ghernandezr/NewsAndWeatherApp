@@ -1,0 +1,21 @@
+{
+  "cityNewsAndWeatherApp": {
+    "weather": {
+      "home": {
+        "title": "Clima",
+        "createLabel": "Crear nuevo Weather",
+        "createOrEditLabel": "Crear o editar Weather",
+        "notFound": "Ningún Weathers encontrado"
+      },
+      "created": "Un nuevo Weather ha sido creado con el identificador {{ param }}",
+      "updated": "Un Weather ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Weather ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Weather {{ id }}?"
+      },
+      "detail": {
+        "title": "Clima"
+      }
+    }
+  }
+}

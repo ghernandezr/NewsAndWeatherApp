@@ -1,8 +1,13 @@
 <div class="card jh-card" *ngIf="news">
   <div class="row">
-    <div class="col-10"><b>Alan Brito Prieto</b></div>
-    <div class="col-2 text-right">
-      <fa-icon icon="ellipsis-h"></fa-icon>
+    <div class="col-8 col-md-10"><b>Alan Brito Prieto</b></div>
+    <div class="col-4 col-md-2 text-right">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-default no-arrow" ngbDropdownToggle><fa-icon icon="ellipsis-h"></fa-icon></button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem [routerLink]="['/news', news.id, 'view']">{{ 'cityNewsAndWeatherApp.news.details' | translate }}</button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">

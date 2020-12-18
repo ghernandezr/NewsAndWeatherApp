@@ -43,6 +43,11 @@ a:hover {
   color: $dropdown-link-hover-color;
 }
 
+/* Remove arrow from dropdown with class no-arrow*/
+.dropdown-toggle.no-arrow::after {
+  display: none;
+}
+
 /* ==========================================================================
 Browser Upgrade Prompt
 ========================================================================== */

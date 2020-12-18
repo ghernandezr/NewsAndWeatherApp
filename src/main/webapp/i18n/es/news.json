@@ -7,6 +7,7 @@
         "createOrEditLabel": "Crear o editar noticia",
         "notFound": "Ningúna noticia encontrada"
       },
+      "details":"Detalles",
       "created": "Una nueva noticia ha sido creada con el identificador {{ param }}",
       "updated": "Una noticia ha sido actualizada con el identificador {{ param }}",
       "deleted": "Una noticia ha sido eliminada con el identificador {{ param }}",

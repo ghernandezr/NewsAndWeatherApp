@@ -43,3 +43,106 @@ $font-size-base: 1rem;
 
 $dropdown-link-hover-color: white;
 $dropdown-link-hover-bg: #343a40;
+
+:root {
+  --b-background-color: #edf3f9;
+  --b-background-color-opacity: rgba(237, 243, 249, 0.7);
+  --b-text-color: #261434;
+  --b-text-secondary-color: #65676b;
+  --b-panel-color: #ffffff;
+  --b-bg-hover-color: #f2f2f2;
+  --b-box-shadow: 0 0 10px rgba(153, 39, 173, 0.3);
+  --b-box-shadow-big: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  --b-divider: #ccd0d5;
+  --b-button-icon: #444950;
+  --b-button-background: #e4e6eb;
+  --b-button-background-hover: #d7dadf;
+  --b-comment-background: #f2f3f5;
+
+  --b-scroll: #d7dadf;
+}
+
+$text-45px: 45px;
+$text-25px: 24px;
+$text-19px: 19px;
+$text-17px: 17px;
+$text-15px: 0.938rem;
+$text-14px: 0.875rem;
+$text-13px: 0.813rem;
+$text-12px: 0.75rem;
+
+/*
+-------------------------------------
+ varible para tamaños
+ ------------------------------------
+ */
+$rem0-8: 0.8rem;
+$rem0-7: 0.7rem;
+$rem-1: 1rem;
+$rem-1-1: 1.1rem;
+$rem-1-2: 1.2rem;
+$rem-1-5: 1.5rem;
+$rem-1-4: 1.4rem;
+$rem-2: 2rem;
+$rem2-2: 2.2rem;
+$rem2-4: 2.4rem;
+$rem2-5: 2.5rem;
+$rem-3: 3rem;
+$rem3-5: 3.5rem;
+$rem-4: 4rem;
+$rem-5: 5rem;
+$rem5-5: 5.5rem;
+$rem-6: 6rem;
+$rem6-5: 6.5rem;
+$rem-7: 7rem;
+$rem-7-5: 7.5rem;
+$rem-8: 8rem;
+$rem10: 10rem;
+$rem12: 12rem;
+$rem13-5: 13.5rem;
+$rem14-5: 14.5rem;
+$rem17-75: 17.75rem;
+$rem19: 19rem;
+$rem15: 15rem;
+$rem18: 18rem;
+$rem20: 20rem;
+$rem21: 21rem;
+$rem22: 22rem;
+$rem25: 25rem;
+$rem30: 30rem;
+$rem35: 35rem;
+$rem24-84: 24.84rem;
+
+$px-45: 45px;
+$px-205: 205px;
+$px-220: 220px;
+$px-250: 250px;
+$px-350: 350px;
+$px-450: 450px;
+
+$hbp-w: 92px;
+$hbp-h: 130px;
+
+$width-320: 320px;
+$width-767: 767px;
+
+$width-768: 768px;
+$width-991: 991px;
+
+$width-992: 992px;
+$width-1023: 1023px;
+
+$width-1024: 1024px;
+$width-1279: 1279px;
+
+$width-1280: 1280px;
+$width-1365: 1365px;
+
+$width-1366: 1366px;
+$width-1439: 1439px;
+
+$width-1440: 1440px;
+$width-1599: 1599px;
+
+$width-1600: 1600px;
+$width-1919: 1919px;

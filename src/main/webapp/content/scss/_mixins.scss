@@ -1,0 +1,148 @@
+@import 'bootstrap-variables';
+
+@mixin fill-available($prop) {
+  #{$prop}: -webkit-fill-available !important;
+  #{$prop}: -moz-available !important;
+  #{$prop}: -ms-available !important;
+  #{$prop}: -o-fill-available !important;
+  #{$prop}: fill-available !important;
+}
+
+@mixin max-content($prop) {
+  #{$prop}: -webkit-max-content !important;
+  #{$prop}: -moz-max-content !important;
+  #{$prop}: -ms-max-content !important;
+  #{$prop}: -o-max-content !important;
+  #{$prop}: max-content !important;
+}
+
+@mixin fit-content($prop) {
+  #{$prop}: -webkit-fit-content !important;
+  #{$prop}: -moz-fit-content !important;
+  #{$prop}: -ms-fit-content !important;
+  #{$prop}: -o-fit-content !important;
+  #{$prop}: fit-content !important;
+}
+
+@mixin display-grid() {
+  display: grid !important;
+  display: -ms-grid !important;
+}
+
+@mixin text-transform($value) {
+  text-transform: $value !important;
+}
+
+@mixin transition($trans) {
+  -webkit-transition: $trans;
+  -moz-transition: $trans;
+  -ms-transition: $trans;
+  transition: $trans;
+}
+
+@mixin responsive($breakpoint, $up: false) {
+  $point: max;
+
+  @if ($up == true) {
+    $point: min;
+  }
+
+  @if $breakpoint == phone {
+    @media (#{$point}-width: 576px) {
+      @content;
+    }
+  }
+  @if $breakpoint == phone-land {
+    @media (#{$point}-width: 768px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-port {
+    @media (#{$point}-width: 992px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    @media (#{$point}-width: 1200px) {
+      @content;
+    }
+  }
+  @if $breakpoint == big-desk {
+    @media (#{$point}-width: 1800px) {
+      @content;
+    }
+  }
+}
+
+@mixin responsiveUp($brakpoint) {
+  @include responsive($brakpoint, up);
+}
+
+/*
+----------------------------------------------------
+mixin para los breakpoint de las medias queries
+ ---------------------------------------------------
+ */
+
+//resolcion 320
+@mixin resolution-320 {
+  @media (min-width: #{$width-320}) and (max-width: #{$width-767}) {
+    @content;
+  }
+}
+
+//resolcion 768
+@mixin resolution-768 {
+  @media (min-width: #{$width-768}) and (max-width: #{$width-991}) {
+    @content;
+  }
+}
+
+//resolcion 992
+@mixin resolution-992 {
+  @media (min-width: #{$width-992}) and (max-width: #{$width-1023}) {
+    @content;
+  }
+}
+
+//resolcion 1024
+@mixin resolution-1024 {
+  @media (min-width: #{$width-1024}) and (max-width: #{$width-1279}) {
+    @content;
+  }
+}
+
+//resolcion 1280
+@mixin resolution-1280 {
+  @media (min-width: #{$width-1280}) and (max-width: #{$width-1365}) {
+    @content;
+  }
+}
+
+//resolcion 1366
+@mixin resolution-1366 {
+  @media (min-width: #{$width-1366}) and (max-width: #{$width-1439}) {
+    @content;
+  }
+}
+
+//resolcion 1440
+@mixin resolution-1440 {
+  @media (min-width: #{$width-1440}) and (max-width: #{$width-1599}) {
+    @content;
+  }
+}
+
+//resolcion 1600
+@mixin resolution-1600 {
+  @media (min-width: #{$width-1600}) and (max-width: #{$width-1919}) {
+    @content;
+  }
+}
+
+//resolcion igual o mayor que 1920
+@mixin resolution-1920 {
+  @media (min-width: 1920px) {
+    @content;
+  }
+}

@@ -1,6 +1,6 @@
 {
   "global": {
-    "title": "CityNewsAndWeather",
+    "title": "NewsAndWeather",
     "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
     "menu": {
       "home": "Home",
@@ -10,6 +10,8 @@
         "author": "Author",
         "city": "City",
         "news": "News",
+        "weather": "Weather",
+        "trace":"Traces",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

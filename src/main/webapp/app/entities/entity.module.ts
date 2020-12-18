@@ -16,6 +16,10 @@ import { RouterModule } from '@angular/router';
         path: 'news',
         loadChildren: () => import('./news/news.module').then(m => m.CityNewsAndWeatherNewsModule),
       },
+      {
+        path: 'weather',
+        loadChildren: () => import('./weather/weather.module').then(m => m.CityNewsAndWeatherWeatherModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],
