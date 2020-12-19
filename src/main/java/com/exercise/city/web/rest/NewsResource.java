@@ -1,9 +1,8 @@
 package com.exercise.city.web.rest;
 
 import com.exercise.city.service.NewsService;
-import com.exercise.city.web.rest.errors.BadRequestAlertException;
 import com.exercise.city.service.dto.NewsDTO;
-
+import com.exercise.city.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -13,10 +12,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -30,14 +28,11 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class NewsResource {
 
-    private final Logger log = LoggerFactory.getLogger(NewsResource.class);
-
     private static final String ENTITY_NAME = "news";
-
+    private final Logger log = LoggerFactory.getLogger(NewsResource.class);
+    private final NewsService newsService;
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
-
-    private final NewsService newsService;
 
     public NewsResource(NewsService newsService) {
         this.newsService = newsService;
@@ -98,6 +93,19 @@ public class NewsResource {
     }
 
     /**
+     * {@code GET  /news/all/{cityId}} : get all the news.
+     *
+     * @param cityId the id of the city
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of news in body.
+     */
+    @GetMapping("/news/all/{cityId}")
+    public ResponseEntity<List<NewsDTO>> getAllNewsByCityId(@PathVariable String cityId) {
+        log.debug("REST request to get News");
+        List<NewsDTO> newsDTOList = newsService.findAllByCityId(cityId);
+        return ResponseEntity.ok().body(newsDTOList);
+    }
+
+    /**
      * {@code GET  /news/:id} : get the "id" news.
      *
      * @param id the id of the newsDTO to retrieve.
@@ -109,6 +117,7 @@ public class NewsResource {
         Optional<NewsDTO> newsDTO = newsService.findOne(id);
         return ResponseUtil.wrapOrNotFound(newsDTO);
     }
+
 
     /**
      * {@code DELETE  /news/:id} : delete the "id" news.

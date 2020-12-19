@@ -156,7 +156,24 @@ public class NewsResourceIT {
             .andExpect(jsonPath("$.[*].cityId").value(hasItem(DEFAULT_CITY_ID)))
             .andExpect(jsonPath("$.[*].createAt").value(hasItem(DEFAULT_CREATE_AT.toString())));
     }
-    
+
+    @Test
+    public void getAllNewsByCityId() throws Exception {
+        // Initialize the database
+        newsRepository.save(news);
+
+        // Get all the newsList
+        restNewsMockMvc.perform(get("/api/news/all/{cityId}", news.getCityId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(news.getId())))
+            .andExpect(jsonPath("$.[*].authorId").value(hasItem(DEFAULT_AUTHOR_ID)))
+            .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].cityId").value(hasItem(DEFAULT_CITY_ID)))
+            .andExpect(jsonPath("$.[*].createAt").value(hasItem(DEFAULT_CREATE_AT.toString())));
+    }
+
     @Test
     public void getNews() throws Exception {
         // Initialize the database
