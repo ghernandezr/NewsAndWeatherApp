@@ -3,11 +3,11 @@
     "news": {
       "home": {
         "title": "News",
-        "createLabel": "Create a new News",
+        "createLabel": "Create a News",
         "createOrEditLabel": "Create or edit a News",
         "notFound": "No News found"
       },
-      "details":"Details",
+      "details": "Details",
       "created": "A new News is created with identifier {{ param }}",
       "updated": "A News is updated with identifier {{ param }}",
       "deleted": "A News is deleted with identifier {{ param }}",
