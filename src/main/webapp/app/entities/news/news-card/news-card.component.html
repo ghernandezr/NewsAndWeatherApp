@@ -1,6 +1,8 @@
 <div class="card jh-card" *ngIf="news">
   <div class="row">
-    <div class="col-8 col-md-10"><b>Alan Brito Prieto</b></div>
+    <div class="col-8 col-md-10" *ngIf="author">
+      <b>{{ author.name }}</b>
+    </div>
     <div class="col-4 col-md-2 text-right">
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn-default no-arrow" ngbDropdownToggle><fa-icon icon="ellipsis-h"></fa-icon></button>
