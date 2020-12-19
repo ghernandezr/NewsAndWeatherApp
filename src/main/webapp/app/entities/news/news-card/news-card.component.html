@@ -1,7 +1,7 @@
 <div class="card jh-card" *ngIf="news">
   <div class="row">
-    <div class="col-8 col-md-10" *ngIf="author">
-      <b>{{ author.name }}</b>
+    <div class="col-8 col-md-10">
+      <b>{{ author ? author.name : 'Sin autor' }}</b>
     </div>
     <div class="col-4 col-md-2 text-right">
       <div ngbDropdown class="d-inline-block">

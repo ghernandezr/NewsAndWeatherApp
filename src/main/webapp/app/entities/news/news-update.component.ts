@@ -7,6 +7,12 @@ import { Observable } from 'rxjs';
 
 import { INews, News } from 'app/shared/model/news.model';
 import { NewsService } from './news.service';
+import { CityService } from '../city/city.service';
+import { AuthorService } from '../author/author.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/user/account.model';
+import { ICity } from 'app/shared/model/city.model';
+import { LocationService } from 'app/shared/components/location/location.service';
 
 @Component({
   selector: 'jhi-news-update',
@@ -15,6 +21,8 @@ import { NewsService } from './news.service';
 export class NewsUpdateComponent implements OnInit {
   isSaving = false;
   createAtDp: any;
+  account!: Account;
+  city?: ICity;
 
   editForm = this.fb.group({
     id: [],
@@ -25,12 +33,26 @@ export class NewsUpdateComponent implements OnInit {
     createAt: [],
   });
 
-  constructor(protected newsService: NewsService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    private accountService: AccountService,
+    protected newsService: NewsService,
+    protected locationService: LocationService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ news }) => {
       this.updateForm(news);
     });
+
+    this.accountService.identity().subscribe(account => {
+      if (account) {
+        this.account = account;
+      }
+    });
+
+    this.registerCityChangeListener();
   }
 
   updateForm(news: INews): void {
@@ -40,7 +62,6 @@ export class NewsUpdateComponent implements OnInit {
       title: news.title,
       description: news.description,
       cityId: news.cityId,
-      createAt: news.createAt,
     });
   }
 
@@ -61,12 +82,10 @@ export class NewsUpdateComponent implements OnInit {
   private createFromForm(): INews {
     return {
       ...new News(),
-      id: this.editForm.get(['id'])!.value,
-      authorId: this.editForm.get(['authorId'])!.value,
+      authorId: this.account.id,
       title: this.editForm.get(['title'])!.value,
       description: this.editForm.get(['description'])!.value,
-      cityId: this.editForm.get(['cityId'])!.value,
-      createAt: this.editForm.get(['createAt'])!.value,
+      cityId: this.city!.id,
     };
   }
 
@@ -84,5 +103,11 @@ export class NewsUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  registerCityChangeListener(): void {
+    this.locationService.cityChange.subscribe((city: ICity) => {
+      this.city = city;
+    });
   }
 }

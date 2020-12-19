@@ -512,3 +512,189 @@ eg $input-color: red;
     }
   }
 }
+
+.news-btn {
+  //font-family: DaxlinePro-Bold;
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  border-radius: 8px;
+  // overflow: hidden;
+  //z-index: 222;
+  border: none;
+  font-size: $text-15px !important;
+  padding: $rem-1 $rem-2 !important;
+  width: auto;
+
+  @include resolution-1920 {
+    font-size: $rem-1-2 !important;
+    padding: $rem-1-2 $rem2-4 !important;
+  }
+
+  &.btn-group {
+    & > button {
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+
+    & > .btn-group > button {
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+    }
+  }
+
+  &.btn-big {
+    font-size: $text-17px * 1.2 !important;
+    padding: $rem-1-2 * 1.2 $rem2-4 * 1.2 !important;
+    min-width: 4rem;
+
+    @include resolution-1600 {
+      font-size: $text-17px !important;
+      padding: $rem-1-2 $rem2-2 !important;
+    }
+
+    @include resolution-1440 {
+      font-size: $text-17px/1.11 !important;
+      padding: $rem-1-2/1.11 $rem2-4/1.11 !important;
+    }
+
+    @include resolution-1366 {
+      font-size: $text-17px/1.11 !important;
+      padding: $rem-1-2/1.11 $rem2-4/1.11 !important;
+    }
+
+    @include resolution-1280 {
+      font-size: $rem-1 !important;
+      padding: $rem-1 $rem-2 !important;
+    }
+
+    @include resolution-1024 {
+      font-size: $rem-1 !important;
+      padding: $rem-1 $rem-2 !important;
+    }
+
+    @include resolution-768 {
+      font-size: $rem-1 !important;
+      padding: $rem-1 $rem-2 !important;
+      margin-bottom: 0.5rem;
+    }
+
+    @include resolution-320 {
+      font-size: $text-15px !important;
+      min-width: 50px;
+      margin-bottom: 0.5rem;
+      padding: 0.8rem 1.2rem !important;
+      //padding: $rem-1 $rem-2 !important;
+    }
+
+    &.full-width {
+      width: 100% !important;
+      min-width: 100% !important;
+    }
+
+    &.full-resolution-320 {
+      @include resolution-320 {
+        width: 100% !important;
+        min-width: 100% !important;
+      }
+    }
+  }
+
+  &.btn-small {
+    position: relative;
+    font-size: $text-15px !important;
+    padding: $rem-1 $rem-2 !important;
+    //top: -0.5rem;
+    background: var(--b-button-background);
+    transition: all 0.5s ease;
+    color: var(--b-button-icon) !important;
+
+    &.btn-xs {
+      padding: 0.5rem 1rem !important;
+    }
+
+    &.btn-xs-fa {
+      padding: 0.58rem 1.2rem !important;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: var(--b-button-background-hover);
+    }
+
+    &.small-border {
+      background: var(--b-bg-hover-color);
+
+      &:hover,
+      &:active,
+      &:focus {
+        background: var(--b-button-background);
+      }
+    }
+
+    &.btn-pink {
+      background: $like-color-bg !important;
+      color: $like-color !important;
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: $like-color-bg-hover !important;
+      }
+    }
+
+    &.full-width {
+      width: 100% !important;
+      min-width: 100% !important;
+    }
+
+    &.btn-white {
+      background: rgba(255, 255, 255, 0.15) !important;
+      color: #ffffff !important;
+
+      &:hover,
+      &:active,
+      &:focus {
+        background: rgba(255, 255, 255, 0.2) !important;
+      }
+    }
+  }
+
+  &.font-normal {
+    //font-family: DaxlinePro-Light;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(25, 181, 206, 0.3) !important;
+    border: none;
+  }
+
+  &.bot-pink {
+    background-image: linear-gradient(105deg, #e62063 10%, #24126a 100%);
+  }
+
+  &.bot-red {
+    background-image: linear-gradient(105deg, #e74539 10%, #24126a 100%);
+  }
+
+  &.bt-group {
+    padding: $rem-1 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    //right: -.1rem;
+    z-index: 9999999;
+    font-size: $text-14px !important;
+
+    background-color: var(--b-comment-background);
+    color: var(--b-text-secondary-color);
+
+    span {
+      position: relative;
+      top: -0.2rem;
+    }
+  }
+
+  &.h-50 {
+    height: 50px !important;
+  }
+}

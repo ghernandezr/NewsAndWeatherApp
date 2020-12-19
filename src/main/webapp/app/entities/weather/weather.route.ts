@@ -41,7 +41,6 @@ export const weatherRoute: Routes = [
       authorities: [],
       pageTitle: 'cityNewsAndWeatherApp.weather.home.title',
     },
-    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
@@ -53,6 +52,5 @@ export const weatherRoute: Routes = [
       authorities: [],
       pageTitle: 'cityNewsAndWeatherApp.weather.home.title',
     },
-    canActivate: [UserRouteAccessService],
   },
 ];
