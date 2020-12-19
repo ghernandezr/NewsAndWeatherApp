@@ -80,11 +80,6 @@ export class NewsComponent implements OnInit, OnDestroy {
     this.eventSubscriber = this.eventManager.subscribe('newsListModification', () => this.reset());
   }
 
-  delete(news: INews): void {
-    const modalRef = this.modalService.open(NewsDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.news = news;
-  }
-
   sort(): string[] {
     const result = [this.predicate + ',' + (this.ascending ? 'asc' : 'desc')];
     if (this.predicate !== 'id') {

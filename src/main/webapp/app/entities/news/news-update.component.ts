@@ -25,12 +25,8 @@ export class NewsUpdateComponent implements OnInit {
   city?: ICity;
 
   editForm = this.fb.group({
-    id: [],
-    authorId: [],
     title: [],
     description: [],
-    cityId: [],
-    createAt: [],
   });
 
   constructor(
@@ -52,16 +48,15 @@ export class NewsUpdateComponent implements OnInit {
       }
     });
 
+    this.city = this.locationService.city;
+
     this.registerCityChangeListener();
   }
 
   updateForm(news: INews): void {
     this.editForm.patchValue({
-      id: news.id,
-      authorId: news.authorId,
       title: news.title,
       description: news.description,
-      cityId: news.cityId,
     });
   }
 
