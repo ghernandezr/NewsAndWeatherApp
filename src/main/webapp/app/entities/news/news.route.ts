@@ -39,7 +39,7 @@ export const newsRoute: Routes = [
     path: '',
     component: NewsComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [],
       pageTitle: 'cityNewsAndWeatherApp.news.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -51,7 +51,7 @@ export const newsRoute: Routes = [
       news: NewsResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [],
       pageTitle: 'cityNewsAndWeatherApp.news.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -63,7 +63,7 @@ export const newsRoute: Routes = [
       news: NewsResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [],
       pageTitle: 'cityNewsAndWeatherApp.news.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -75,7 +75,7 @@ export const newsRoute: Routes = [
       news: NewsResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [],
       pageTitle: 'cityNewsAndWeatherApp.news.home.title',
     },
     canActivate: [UserRouteAccessService],

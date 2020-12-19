@@ -38,7 +38,7 @@ export const weatherRoute: Routes = [
     path: '',
     component: WeatherComponent,
     data: {
-      authorities: [Authority.USER],
+      authorities: [],
       pageTitle: 'cityNewsAndWeatherApp.weather.home.title',
     },
     canActivate: [UserRouteAccessService],
@@ -50,7 +50,7 @@ export const weatherRoute: Routes = [
       weather: WeatherResolve,
     },
     data: {
-      authorities: [Authority.USER],
+      authorities: [],
       pageTitle: 'cityNewsAndWeatherApp.weather.home.title',
     },
     canActivate: [UserRouteAccessService],
