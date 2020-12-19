@@ -4,7 +4,12 @@
       <h2 id="page-heading">
         <span jhiTranslate="cityNewsAndWeatherApp.news.home.title">News</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-news" [routerLink]="['/news/new']">
+        <button
+          *jhiHasAnyAuthority="'ROLE_USER'"
+          id="jh-create-entity"
+          class="btn btn-primary float-right jh-create-entity create-news"
+          [routerLink]="['/news/new']"
+        >
           <fa-icon icon="plus"></fa-icon>
           <span jhiTranslate="cityNewsAndWeatherApp.news.home.createLabel">
             Create a new News

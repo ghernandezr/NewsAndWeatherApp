@@ -71,36 +71,6 @@ eg $input-color: red;
         width: $rem-8 * 1.2;
         height: $rem3-5 * 1.2;
       }
-
-      //@include resolution-1600 {
-      //  width: $rem-7-5;
-      //  height: $rem2-5;
-      //}
-      //
-      //@include resolution-1440 {
-      //  width: $rem-7-5/1.11;
-      //  height: $rem2-5/1.11;
-      //}
-      //
-      //@include resolution-1366 {
-      //  width: $rem5-5/1.17;
-      //  height: $rem2-5/1.17;
-      //}
-      //
-      //@include resolution-1280 {
-      //  width: $rem5-5/1.25;
-      //  height: $rem2-5/1.25;
-      //}
-      //
-      //@include resolution-1024 {
-      //  width: $rem5-5/1.56;
-      //  height: $rem2-5/1.56;
-      //}
-      //
-      //@include resolution-320 {
-      //  width: 4rem;
-      //  height: 2rem;
-      //}
     }
 
     .navbar-nav > li > a {
@@ -420,6 +390,124 @@ eg $input-color: red;
 
       &.no-hover a {
         background-color: transparent !important;
+      }
+    }
+  }
+
+  .news-input {
+    border-radius: 8px !important;
+    color: var(--b-text-color) !important;
+    background: var(--b-comment-background) !important;
+    border: none;
+    //border: var(--b-panel-color)!important;
+    box-shadow: 0 0 0 0.1rem var(--b-panel-color) !important;
+    //z-index: 999999;
+
+    &.z-index-0 {
+      z-index: 0 !important;
+    }
+
+    &.text-align-center {
+      text-align: center !important;
+    }
+
+    &.b-p-l-1-5 {
+      padding-left: 1.5rem !important;
+    }
+
+    &.border-radius {
+      border-radius: 0 !important;
+    }
+
+    &.border-radius-left {
+      border-top-left-radius: 8px !important;
+      border-bottom-left-radius: 8px !important;
+    }
+
+    &.resize-none {
+      resize: none;
+    }
+
+    &.w-450 {
+      width: $px-450 !important;
+      height: 52px !important;
+
+      @include resolution-768 {
+        width: 305px !important;
+      }
+
+      @include resolution-320 {
+        width: $px-450/2 !important;
+      }
+    }
+
+    &.w-350 {
+      width: $px-350 !important;
+      height: 52px !important;
+
+      @include resolution-768 {
+        width: 305px !important;
+      }
+
+      @include resolution-320 {
+        width: $px-220/2 !important;
+      }
+    }
+
+    &.w-220 {
+      width: $px-220 !important;
+      height: 52px !important;
+
+      @include resolution-768 {
+        width: 305px !important;
+      }
+
+      @include resolution-320 {
+        width: $px-220/2 !important;
+      }
+    }
+
+    &.w-150 {
+      width: 150px !important;
+      height: 52px !important;
+    }
+
+    &.w-100 {
+      width: 100% !important;
+      height: 40px !important;
+    }
+
+    &.h-50 {
+      height: 50px !important;
+    }
+
+    &.b-l-0 {
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+    }
+
+    &.h-45 {
+      height: 45px !important;
+    }
+
+    &.w-100-px {
+      width: 100px !important;
+    }
+
+    &.text-area {
+      width: 450px !important;
+      resize: none;
+
+      @include resolution-768 {
+        width: 305px !important;
+      }
+
+      @include resolution-320 {
+        width: $px-450/2 !important;
+      }
+
+      &.width-100 {
+        width: 100% !important;
       }
     }
   }

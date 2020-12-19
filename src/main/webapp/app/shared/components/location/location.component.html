@@ -1,0 +1,19 @@
+<div class="position-relative w-auto h-100 d-flex align-items-center">
+  <form novalidate name="locationForm" [formGroup]="locationForm">
+    <div class="row no-gutters align-items-center">
+      <div class="col-12">
+        <div class="form-group mb-0 d-flex align-items-center">
+          <div class="mr-2">
+            <fa-icon icon="map-marker-alt" class="icon-navbar w-20 top-2 icon-secondary-color s-2-2"></fa-icon>
+            <!--<span class="biutix-text f-s-14 secondary-color f-w-500" jhiTranslate="shipping.countryselect" for="countries"
+              >Country Selection</span
+            >-->
+          </div>
+          <select class="form-control news-input w-100" id="city" name="city" formControlName="city">
+            <option *ngFor="let city of cities" [value]="city.id"> {{ city.name }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -5,10 +5,18 @@ import { AlertComponent } from './alert/alert.component';
 import { AlertErrorComponent } from './alert/alert-error.component';
 import { LoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
-
+import { LocationComponent } from './components/location/location.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
-  imports: [CityNewsAndWeatherSharedLibsModule],
-  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective],
+  imports: [CityNewsAndWeatherSharedLibsModule, FormsModule, ReactiveFormsModule],
+  declarations: [
+    FindLanguageFromKeyPipe,
+    AlertComponent,
+    LocationComponent,
+    AlertErrorComponent,
+    LoginModalComponent,
+    HasAnyAuthorityDirective,
+  ],
   entryComponents: [LoginModalComponent],
   exports: [
     CityNewsAndWeatherSharedLibsModule,
@@ -17,6 +25,7 @@ import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
     AlertErrorComponent,
     LoginModalComponent,
     HasAnyAuthorityDirective,
+    LocationComponent,
   ],
 })
 export class CityNewsAndWeatherSharedModule {}
