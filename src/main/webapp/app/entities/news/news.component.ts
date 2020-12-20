@@ -9,6 +9,8 @@ import { INews } from 'app/shared/model/news.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { NewsService } from './news.service';
 import { NewsDeleteDialogComponent } from './news-delete-dialog.component';
+import { ICity } from 'app/shared/model/city.model';
+import { LocationService } from 'app/shared/components/location/location.service';
 
 @Component({
   selector: 'jhi-news',
@@ -22,12 +24,14 @@ export class NewsComponent implements OnInit, OnDestroy {
   page: number;
   predicate: string;
   ascending: boolean;
+  city?: ICity;
 
   constructor(
     protected newsService: NewsService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
-    protected parseLinks: JhiParseLinks
+    protected parseLinks: JhiParseLinks,
+    protected locationService: LocationService
   ) {
     this.news = [];
     this.itemsPerPage = ITEMS_PER_PAGE;
@@ -41,7 +45,7 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   loadAll(): void {
     this.newsService
-      .query({
+      .queryByCity(this.city!.id!, {
         page: this.page,
         size: this.itemsPerPage,
         sort: this.sort(),
@@ -61,6 +65,7 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.city = this.locationService.city;
     this.loadAll();
     this.registerChangeInNews();
   }
@@ -78,6 +83,10 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   registerChangeInNews(): void {
     this.eventSubscriber = this.eventManager.subscribe('newsListModification', () => this.reset());
+    this.locationService.cityChange.subscribe((city: ICity) => {
+      this.city = city;
+      this.loadAll();
+    });
   }
 
   sort(): string[] {
