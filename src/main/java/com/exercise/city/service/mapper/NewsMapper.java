@@ -22,4 +22,17 @@ public interface NewsMapper extends EntityMapper<NewsDTO, News> {
         news.setId(id);
         return news;
     }
+
+
+    default NewsDTO toDto(News entity){
+        NewsDTO newsDTO = new NewsDTO();
+        newsDTO.setId(entity.getId());
+        newsDTO.setAuthorId(entity.getAuthorId());
+        newsDTO.setCityId(entity.getCityId());
+        newsDTO.setDescription(entity.getDescription());
+        newsDTO.setTitle(entity.getTitle());
+        newsDTO.setAuthorName(entity.getAuthorName());
+        newsDTO.setOwner(entity.isOwner());
+        return newsDTO;
+    }
 }
