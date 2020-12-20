@@ -8,9 +8,7 @@ import com.exercise.city.repository.UserRepository;
 import com.exercise.city.security.AuthoritiesConstants;
 import com.exercise.city.security.SecurityUtils;
 import com.exercise.city.service.dto.UserDTO;
-
 import io.github.jhipster.security.RandomUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -60,6 +58,13 @@ public class UserService {
                 log.debug("Activated user: {}", user);
                 return user;
             });
+    }
+
+
+    public User getCurrenUser() {
+        log.debug("Getting current User ");
+        return SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneByLogin)
+            .orElse(null);
     }
 
     public Optional<User> completePasswordReset(String newPassword, String key) {
@@ -128,7 +133,7 @@ public class UserService {
 
     private boolean removeNonActivatedUser(User existingUser) {
         if (existingUser.getActivated()) {
-             return false;
+            return false;
         }
         userRepository.delete(existingUser);
         this.clearUserCaches(existingUser);
@@ -286,6 +291,7 @@ public class UserService {
 
     /**
      * Gets a list of all the authorities.
+     *
      * @return a list of all the authorities.
      */
     public List<String> getAuthorities() {

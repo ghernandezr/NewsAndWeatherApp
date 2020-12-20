@@ -6,7 +6,6 @@ import com.exercise.city.repository.NewsRepository;
 import com.exercise.city.service.NewsService;
 import com.exercise.city.service.dto.NewsDTO;
 import com.exercise.city.service.mapper.NewsMapper;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,9 @@ public class NewsResourceIT {
     private static final String DEFAULT_AUTHOR_ID = "AAAAAAAAAA";
     private static final String UPDATED_AUTHOR_ID = "BBBBBBBBBB";
 
+    private static final String DEFAULT_AUTHOR_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_AUTHOR_NAME = "BBBBBBBBBB";
+
     private static final String DEFAULT_TITLE = "AAAAAAAAAA";
     private static final String UPDATED_TITLE = "BBBBBBBBBB";
 
@@ -64,7 +66,7 @@ public class NewsResourceIT {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -74,12 +76,14 @@ public class NewsResourceIT {
             .title(DEFAULT_TITLE)
             .description(DEFAULT_DESCRIPTION)
             .cityId(DEFAULT_CITY_ID)
+            .author_name(DEFAULT_AUTHOR_NAME)
             .createAt(DEFAULT_CREATE_AT);
         return news;
     }
+
     /**
      * Create an updated entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -89,6 +93,7 @@ public class NewsResourceIT {
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
             .cityId(UPDATED_CITY_ID)
+            .author_name(UPDATED_AUTHOR_NAME)
             .createAt(UPDATED_CREATE_AT);
         return news;
     }
@@ -114,6 +119,7 @@ public class NewsResourceIT {
         assertThat(newsList).hasSize(databaseSizeBeforeCreate + 1);
         News testNews = newsList.get(newsList.size() - 1);
         assertThat(testNews.getAuthorId()).isEqualTo(DEFAULT_AUTHOR_ID);
+        assertThat(testNews.getAuthor_name()).isEqualTo(DEFAULT_AUTHOR_NAME);
         assertThat(testNews.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testNews.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testNews.getCityId()).isEqualTo(DEFAULT_CITY_ID);
@@ -151,6 +157,7 @@ public class NewsResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(news.getId())))
             .andExpect(jsonPath("$.[*].authorId").value(hasItem(DEFAULT_AUTHOR_ID)))
+            .andExpect(jsonPath("$.[*].author_name").value(hasItem(DEFAULT_AUTHOR_NAME)))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].cityId").value(hasItem(DEFAULT_CITY_ID)))
@@ -168,6 +175,7 @@ public class NewsResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(news.getId())))
             .andExpect(jsonPath("$.[*].authorId").value(hasItem(DEFAULT_AUTHOR_ID)))
+            .andExpect(jsonPath("$.[*].author_name").value(hasItem(DEFAULT_AUTHOR_NAME)))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].cityId").value(hasItem(DEFAULT_CITY_ID)))
@@ -185,11 +193,13 @@ public class NewsResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(news.getId()))
             .andExpect(jsonPath("$.authorId").value(DEFAULT_AUTHOR_ID))
+            .andExpect(jsonPath("$.[*].author_name").value(hasItem(DEFAULT_AUTHOR_NAME)))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.cityId").value(DEFAULT_CITY_ID))
             .andExpect(jsonPath("$.createAt").value(DEFAULT_CREATE_AT.toString()));
     }
+
     @Test
     public void getNonExistingNews() throws Exception {
         // Get the news
@@ -211,6 +221,7 @@ public class NewsResourceIT {
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
             .cityId(UPDATED_CITY_ID)
+            .author_name(UPDATED_AUTHOR_NAME)
             .createAt(UPDATED_CREATE_AT);
         NewsDTO newsDTO = newsMapper.toDto(updatedNews);
 
@@ -224,6 +235,7 @@ public class NewsResourceIT {
         assertThat(newsList).hasSize(databaseSizeBeforeUpdate);
         News testNews = newsList.get(newsList.size() - 1);
         assertThat(testNews.getAuthorId()).isEqualTo(UPDATED_AUTHOR_ID);
+        assertThat(testNews.getAuthorId()).isEqualTo(UPDATED_AUTHOR_NAME);
         assertThat(testNews.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testNews.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testNews.getCityId()).isEqualTo(UPDATED_CITY_ID);

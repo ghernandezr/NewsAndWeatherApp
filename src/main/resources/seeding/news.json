@@ -2,14 +2,16 @@
   "data": [
     {
       "_id": "59712e395ddd4f12cb63c58a",
-      "authorId": "5a0d7b2c4141d016c4eba355",
+      "authorId": "user-2",
+      "author_name": "Dausbel Torreblanca",
       "title": "La vacunación contra la Covid en España arrancará el domingo 27 de diciembre",
       "description": "España empezará a vacunar contra la Covid el primer día de los fijados por la UE para ello. El ministro de Sanidad, Salvador Illa, ha anunciado este viernes que la vacunación empezará el domingo 27 de diciembre y que la primera remesa de dosis llegará un día antes, el 26 de diciembre.",
       "cityId": "59712e395cff4f12cb63c58a"
     },
     {
       "_id": "59712e555cff4f12cb63c58a",
-      "authorId": "5a0d7b2c4141d016c4eba355",
+      "authorId": "user-2",
+      "author_name": "Dausbel Torreblanca",
       "title": "Un miembro del Gobierno belga desvela en Twitter los precios de las vacunas que la UE mantenía en secreto",
       "description": "Un cargo del Gobierno belga ha desvelado en la red social Twitter los precios de las vacunas que la Comisión Europea ha acordado con los seis grupos farmacéuticos con los que ha cerrado acuerdos en el marco de su estrategia de vacunación contra laCovid-19 y que la institución europea mantenía en secreto por razones de confidencialidad.",
       "cityId": "59712e395cff4f12cb63c58d"
