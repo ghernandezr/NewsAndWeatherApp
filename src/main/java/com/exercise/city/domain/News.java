@@ -31,6 +31,11 @@ public class News implements Serializable {
     @Field("city_id")
     private String cityId;
 
+    @Field("author_name")
+    private String author_name;
+
+    private boolean owner;
+
     @Field("create_at")
     private LocalDate createAt;
 
@@ -114,6 +119,33 @@ public class News implements Serializable {
         return this;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+
+    public boolean isOwner() {
+        return owner;
+    }
+
+    public void setOwner(boolean owner) {
+        this.owner = owner;
+    }
+
+    public News owner(boolean owner) {
+        this.owner = owner;
+        return this;
+    }
+
+    public String getAuthor_name() {
+        return author_name;
+    }
+
+    public void setAuthor_name(String author_name) {
+        this.author_name = author_name;
+    }
+
+    public News author_name(String author_name) {
+        this.author_name = author_name;
+        return this;
+    }
 
     public ZonedDateTime getUpdated() {
         return updated;

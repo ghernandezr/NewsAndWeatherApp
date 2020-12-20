@@ -1,13 +1,13 @@
 package com.exercise.city.service.dto;
 
-import java.time.LocalDate;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * A DTO for the {@link com.exercise.city.domain.News} entity.
  */
 public class NewsDTO implements Serializable {
-    
+
     private String id;
 
     private String authorId;
@@ -18,9 +18,13 @@ public class NewsDTO implements Serializable {
 
     private String cityId;
 
+    private boolean owner;
+
+    private String author_name;
+
     private LocalDate createAt;
 
-    
+
     public String getId() {
         return id;
     }
@@ -59,6 +63,22 @@ public class NewsDTO implements Serializable {
 
     public void setCityId(String cityId) {
         this.cityId = cityId;
+    }
+
+    public boolean isOwner() {
+        return owner;
+    }
+
+    public void setOwner(boolean owner) {
+        this.owner = owner;
+    }
+
+    public String getAuthor_name() {
+        return author_name;
+    }
+
+    public void setAuthor_name(String author_name) {
+        this.author_name = author_name;
     }
 
     public LocalDate getCreateAt() {

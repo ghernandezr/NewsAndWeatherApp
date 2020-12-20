@@ -1,17 +1,22 @@
 package com.exercise.city.service.impl;
 
 import com.exercise.city.domain.News;
+import com.exercise.city.domain.User;
 import com.exercise.city.repository.NewsRepository;
 import com.exercise.city.service.NewsService;
+import com.exercise.city.service.UserService;
 import com.exercise.city.service.dto.NewsDTO;
 import com.exercise.city.service.mapper.NewsMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -25,10 +30,13 @@ public class NewsServiceImpl implements NewsService {
 
     private final NewsRepository newsRepository;
 
+    private final UserService userService;
+
     private final NewsMapper newsMapper;
 
-    public NewsServiceImpl(NewsRepository newsRepository, NewsMapper newsMapper) {
+    public NewsServiceImpl(NewsRepository newsRepository, UserService userService, NewsMapper newsMapper) {
         this.newsRepository = newsRepository;
+        this.userService = userService;
         this.newsMapper = newsMapper;
     }
 
@@ -42,7 +50,7 @@ public class NewsServiceImpl implements NewsService {
     public NewsDTO save(NewsDTO newsDTO) {
         log.debug("Request to save News : {}", newsDTO);
         News news = newsMapper.toEntity(newsDTO);
-        news = newsRepository.save(news);
+        news = newsRepository.save(settingNewsAuthorName(news).createAt(LocalDate.now()));
         return newsMapper.toDto(news);
     }
 
@@ -56,6 +64,7 @@ public class NewsServiceImpl implements NewsService {
     public Page<NewsDTO> findAll(Pageable pageable) {
         log.debug("Request to get all News");
         return newsRepository.findAll(pageable)
+            .map(this::settingNewsOwner)
             .map(newsMapper::toDto);
     }
 
@@ -70,6 +79,7 @@ public class NewsServiceImpl implements NewsService {
     public Optional<NewsDTO> findOne(String id) {
         log.debug("Request to get News : {}", id);
         return newsRepository.findById(id)
+            .map(this::settingNewsOwner)
             .map(newsMapper::toDto);
     }
 
@@ -95,7 +105,34 @@ public class NewsServiceImpl implements NewsService {
         log.debug("Request to get all  News : {}", cityId);
         return newsRepository.findAllByCityId(cityId)
             .stream()
+            .map(this::settingNewsOwner)
             .map(newsMapper::toDto)
             .collect(Collectors.toList());
+    }
+
+    private News settingNewsAuthorName(News news) {
+        return Optional.ofNullable(userService.getCurrenUser())
+            .filter(user -> Objects.nonNull(user.getId()))
+            .map(user -> {
+                News news1 = news.author_name(user.getFirstName() + " " + user.getLastName());
+                if (StringUtils.isEmpty(news.getAuthorId()))
+                    news1.authorId(user.getId());
+                return news1;
+            })
+            .orElse(news);
+    }
+
+    private News settingNewsOwner(News news) {
+        return Optional.ofNullable(news)
+            .filter(news1 -> Objects.nonNull(news1.getAuthorId()))
+            .map(news1 -> {
+                User user = userService.getCurrenUser();
+                if (Objects.nonNull(user) && Objects.nonNull(user.getId()) && StringUtils.equalsIgnoreCase(user.getId(), news1.getAuthorId()))
+                    return news1.owner(true);
+                else
+                    return news1.owner(false);
+            })
+            .orElse(news);
+
     }
 }
