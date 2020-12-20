@@ -10,14 +10,22 @@ import { Account } from 'app/core/user/account.model';
   templateUrl: './home.component.html',
   styleUrls: ['home.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
-
+  authSubscription?: Subscription;
   constructor(private accountService: AccountService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
+  }
 
   isAuthenticated(): boolean {
     return this.accountService.isAuthenticated();
+  }
+
+  ngOnDestroy(): void {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
   }
 }
