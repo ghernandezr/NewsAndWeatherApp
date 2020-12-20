@@ -114,7 +114,7 @@ public class NewsServiceImpl implements NewsService {
         return Optional.ofNullable(userService.getCurrenUser())
             .filter(user -> Objects.nonNull(user.getId()))
             .map(user -> {
-                News news1 = news.author_name(user.getFirstName() + " " + user.getLastName());
+                News news1 = news.authorName(user.getFirstName() + " " + user.getLastName());
                 if (StringUtils.isEmpty(news.getAuthorId()))
                     news1.authorId(user.getId());
                 return news1;

@@ -1,9 +1,10 @@
 <div class="container mt-4" style="max-width: 1200px;">
   <div class="row">
     <div class="col-12">
-      <h2 id="page-heading">
-        <span jhiTranslate="cityNewsAndWeatherApp.news.home.title">News</span>
-
+      <div class="d-flex align-items-center justify-content-between">
+        <h2 id="page-heading">
+          <span jhiTranslate="cityNewsAndWeatherApp.news.home.title">News</span>
+        </h2>
         <button
           *jhiHasAnyAuthority="'ROLE_USER'"
           id="jh-create-entity"
@@ -15,7 +16,7 @@
             Create a new News
           </span>
         </button>
-      </h2>
+      </div>
       <jhi-alert-error></jhi-alert-error>
 
       <jhi-alert></jhi-alert>

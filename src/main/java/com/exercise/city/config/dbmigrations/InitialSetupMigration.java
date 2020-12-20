@@ -138,7 +138,7 @@ public class InitialSetupMigration {
                 JsonObject seedEntry = elem.getAsJsonObject();
                 News news = new News();
                 news.setAuthorId(seedEntry.get("authorId").getAsString());
-                news.setAuthor_name(seedEntry.get("author_name").getAsString());
+                news.setAuthorName(seedEntry.get("author_name").getAsString());
                 if (!Objects.isNull(seedEntry.get("_id"))) {
                     news.setId(seedEntry.get("_id").getAsString());
                 }

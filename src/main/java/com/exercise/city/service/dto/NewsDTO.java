@@ -20,7 +20,7 @@ public class NewsDTO implements Serializable {
 
     private boolean owner;
 
-    private String author_name;
+    private String authorName;
 
     private LocalDate createAt;
 
@@ -73,12 +73,12 @@ public class NewsDTO implements Serializable {
         this.owner = owner;
     }
 
-    public String getAuthor_name() {
-        return author_name;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setAuthor_name(String author_name) {
-        this.author_name = author_name;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
     public LocalDate getCreateAt() {

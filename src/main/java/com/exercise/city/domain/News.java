@@ -32,7 +32,7 @@ public class News implements Serializable {
     private String cityId;
 
     @Field("author_name")
-    private String author_name;
+    private String authorName;
 
     private boolean owner;
 
@@ -134,16 +134,16 @@ public class News implements Serializable {
         return this;
     }
 
-    public String getAuthor_name() {
-        return author_name;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setAuthor_name(String author_name) {
-        this.author_name = author_name;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
-    public News author_name(String author_name) {
-        this.author_name = author_name;
+    public News authorName(String authorName) {
+        this.authorName = authorName;
         return this;
     }
 

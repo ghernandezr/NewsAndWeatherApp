@@ -1,17 +1,17 @@
 <div class="card jh-card" *ngIf="news">
   <div class="row">
     <div class="col-8 col-md-10">
-      <b>{{ author ? author.name : 'Sin autor' }}</b>
+      <b>{{ news.authorName }}</b>
     </div>
     <div class="col-4 col-md-2 text-right">
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn-default no-arrow" ngbDropdownToggle><fa-icon icon="ellipsis-h"></fa-icon></button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <button ngbDropdownItem [routerLink]="['/news', news.id, 'view']">{{ 'cityNewsAndWeatherApp.news.details' | translate }}</button>
-          <button ngbDropdownItem *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']" [routerLink]="['/news', news.id, 'edit']">
+          <button ngbDropdownItem *ngIf="news.owner" [routerLink]="['/news', news.id, 'edit']">
             {{ 'entity.action.edit' | translate }}
           </button>
-          <button ngbDropdownItem *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']" (click)="delete(news)">
+          <button ngbDropdownItem *ngIf="news.owner" (click)="delete(news)">
             {{ 'entity.action.delete' | translate }}
           </button>
         </div>

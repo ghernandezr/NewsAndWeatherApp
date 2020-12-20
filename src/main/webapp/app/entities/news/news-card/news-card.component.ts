@@ -19,17 +19,7 @@ export class NewsCardComponent implements OnInit {
 
   constructor(private authorService: AuthorService, protected modalService: NgbModal) {}
 
-  ngOnInit(): void {
-    this.fetchAuthor();
-  }
-
-  fetchAuthor(): void {
-    if (this.news) {
-      this.authorService.find(this.news.authorId!).subscribe((response: HttpResponse<IAuthor>) => {
-        this.author = response.body!;
-      });
-    }
-  }
+  ngOnInit(): void {}
 
   delete(news: INews): void {
     const modalRef = this.modalService.open(NewsDeleteDialogComponent, { size: 'lg', backdrop: 'static' });

@@ -1,46 +1,44 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="news">
-            <h2><span jhiTranslate="cityNewsAndWeatherApp.news.detail.title">News</span> {{ news.id }}</h2>
+  <div class="col-8">
+    <div class="card jh-card" *ngIf="news">
+      <h2>{{ news.title }}</h2>
 
-            <hr>
+      <hr />
 
-            <jhi-alert-error></jhi-alert-error>
+      <jhi-alert-error></jhi-alert-error>
 
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="cityNewsAndWeatherApp.news.authorId">Author Id</span></dt>
-                <dd>
-                    <span>{{ news.authorId }}</span>
-                </dd>
-                <dt><span jhiTranslate="cityNewsAndWeatherApp.news.title">Title</span></dt>
-                <dd>
-                    <span>{{ news.title }}</span>
-                </dd>
-                <dt><span jhiTranslate="cityNewsAndWeatherApp.news.description">Description</span></dt>
-                <dd>
-                    <span>{{ news.description }}</span>
-                </dd>
-                <dt><span jhiTranslate="cityNewsAndWeatherApp.news.cityId">City Id</span></dt>
-                <dd>
-                    <span>{{ news.cityId }}</span>
-                </dd>
-                <dt><span jhiTranslate="cityNewsAndWeatherApp.news.createAt">Create At</span></dt>
-                <dd>
-                    <span>{{ news.createAt }}</span>
-                </dd>
-            </dl>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="cityNewsAndWeatherApp.author.detail.title">Author</span></dt>
+        <dd>
+          <span>{{ news.authorName }}</span>
+        </dd>
+        <dt><span jhiTranslate="cityNewsAndWeatherApp.news.title">Title</span></dt>
+        <dd>
+          <span>{{ news.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="cityNewsAndWeatherApp.news.description">Description</span></dt>
+        <dd>
+          <span>{{ news.description }}</span>
+        </dd>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+        <dd>
+          <span>{{ news.createAt | date }}</span>
+        </dd>
+      </dl>
+      <div class="d-flex justify-content-between">
+        <button type="submit" (click)="previousState()" class="btn btn-info btn-pink news-btn btn-small">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
 
-            <button type="button"
-                    [routerLink]="['/news', news.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-        </div>
+        <button
+          type="button"
+          *ngIf="news.owner"
+          [routerLink]="['/news', news.id, 'edit']"
+          class="btn btn-primary btn-pink news-btn btn-small"
+        >
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
     </div>
+  </div>
 </div>

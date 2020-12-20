@@ -76,7 +76,7 @@ public class NewsResourceIT {
             .title(DEFAULT_TITLE)
             .description(DEFAULT_DESCRIPTION)
             .cityId(DEFAULT_CITY_ID)
-            .author_name(DEFAULT_AUTHOR_NAME)
+            .authorName(DEFAULT_AUTHOR_NAME)
             .createAt(DEFAULT_CREATE_AT);
         return news;
     }
@@ -93,7 +93,7 @@ public class NewsResourceIT {
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
             .cityId(UPDATED_CITY_ID)
-            .author_name(UPDATED_AUTHOR_NAME)
+            .authorName(UPDATED_AUTHOR_NAME)
             .createAt(UPDATED_CREATE_AT);
         return news;
     }
@@ -119,7 +119,7 @@ public class NewsResourceIT {
         assertThat(newsList).hasSize(databaseSizeBeforeCreate + 1);
         News testNews = newsList.get(newsList.size() - 1);
         assertThat(testNews.getAuthorId()).isEqualTo(DEFAULT_AUTHOR_ID);
-        assertThat(testNews.getAuthor_name()).isEqualTo(DEFAULT_AUTHOR_NAME);
+        assertThat(testNews.getAuthorName()).isEqualTo(DEFAULT_AUTHOR_NAME);
         assertThat(testNews.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testNews.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testNews.getCityId()).isEqualTo(DEFAULT_CITY_ID);
@@ -221,7 +221,7 @@ public class NewsResourceIT {
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
             .cityId(UPDATED_CITY_ID)
-            .author_name(UPDATED_AUTHOR_NAME)
+            .authorName(UPDATED_AUTHOR_NAME)
             .createAt(UPDATED_CREATE_AT);
         NewsDTO newsDTO = newsMapper.toDto(updatedNews);
 
