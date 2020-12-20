@@ -14,7 +14,7 @@ import { LocationService } from 'app/shared/components/location/location.service
   templateUrl: './weather.component.html',
 })
 export class WeatherComponent implements OnInit, OnDestroy {
-  currentweather?: IWeather;
+  currentWeather?: IWeather;
   forecastWeather: IWeather[];
   eventSubscriber?: Subscription;
   city?: ICity;
@@ -33,14 +33,14 @@ export class WeatherComponent implements OnInit, OnDestroy {
       this.weatherService
         .query(this.city.name!, this.city.countryCode!.toLowerCase(), this.languajeService.currentLang)
         .subscribe((response: any) => {
-          this.currentweather = new Weather();
-          this.currentweather.date = moment();
-          this.currentweather.temp = new Intl.NumberFormat('en-US', {
+          this.currentWeather = new Weather();
+          this.currentWeather.date = moment();
+          this.currentWeather.temp = new Intl.NumberFormat('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }).format(response.main.temp - 273.15);
-          this.currentweather.icon = `http://openweathermap.org/img/w/${response.weather[0].icon}.png`;
-          this.currentweather.description = response.weather[0].description;
+          this.currentWeather.icon = `http://openweathermap.org/img/w/${response.weather[0].icon}.png`;
+          this.currentWeather.description = response.weather[0].description;
         });
 
       this.weatherService

@@ -43,7 +43,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.weathers && comp.weathers[0]).toEqual(jasmine.objectContaining({ id: '123' }));
+      expect(comp.currentWeather && comp.currentWeather[0]).toEqual(jasmine.objectContaining({ id: '123' }));
     });
   });
 });
