@@ -6,7 +6,7 @@
     <div class="col-4 col-md-2 text-right">
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn-default no-arrow" ngbDropdownToggle><fa-icon icon="ellipsis-h"></fa-icon></button>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu dropdown-menu-left">
           <button ngbDropdownItem [routerLink]="['/news', news.id, 'view']">{{ 'cityNewsAndWeatherApp.news.details' | translate }}</button>
           <button ngbDropdownItem *ngIf="news.owner" [routerLink]="['/news', news.id, 'edit']">
             {{ 'entity.action.edit' | translate }}

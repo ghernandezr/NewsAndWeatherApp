@@ -17,6 +17,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
   currentWeather?: IWeather;
   forecastWeather: IWeather[];
   eventSubscriber?: Subscription;
+
   city?: ICity;
 
   constructor(

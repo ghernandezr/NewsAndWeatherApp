@@ -11,6 +11,7 @@ import { NewsService } from './news.service';
 import { NewsDeleteDialogComponent } from './news-delete-dialog.component';
 import { ICity } from 'app/shared/model/city.model';
 import { LocationService } from 'app/shared/components/location/location.service';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-news',
@@ -19,6 +20,9 @@ import { LocationService } from 'app/shared/components/location/location.service
 export class NewsComponent implements OnInit, OnDestroy {
   news: INews[];
   eventSubscriber?: Subscription;
+  authSubscription?: Subscription;
+  cityChangeSubscription?: Subscription;
+
   itemsPerPage: number;
   links: any;
   page: number;
@@ -31,7 +35,8 @@ export class NewsComponent implements OnInit, OnDestroy {
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
     protected parseLinks: JhiParseLinks,
-    protected locationService: LocationService
+    protected locationService: LocationService,
+    protected accountService: AccountService
   ) {
     this.news = [];
     this.itemsPerPage = ITEMS_PER_PAGE;
@@ -44,13 +49,15 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
   loadAll(): void {
-    this.newsService
-      .queryByCity(this.city!.id!, {
-        page: this.page,
-        size: this.itemsPerPage,
-        sort: this.sort(),
-      })
-      .subscribe((res: HttpResponse<INews[]>) => this.paginateNews(res.body, res.headers));
+    if (this.city) {
+      this.newsService
+        .queryByCity(this.city.id!, {
+          page: this.page,
+          size: this.itemsPerPage,
+          sort: this.sort(),
+        })
+        .subscribe((res: HttpResponse<INews[]>) => this.paginateNews(res.body, res.headers));
+    }
   }
 
   reset(): void {
@@ -66,13 +73,23 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.city = this.locationService.city;
-    this.loadAll();
+    // this.loadAll();
     this.registerChangeInNews();
+    this.authSubscription = this.accountService.getAuthenticationState().subscribe(() => {
+      this.reset();
+    });
   }
 
   ngOnDestroy(): void {
     if (this.eventSubscriber) {
       this.eventManager.destroy(this.eventSubscriber);
+    }
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
+
+    if (this.cityChangeSubscription) {
+      this.cityChangeSubscription.unsubscribe();
     }
   }
 
@@ -83,9 +100,9 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   registerChangeInNews(): void {
     this.eventSubscriber = this.eventManager.subscribe('newsListModification', () => this.reset());
-    this.locationService.cityChange.subscribe((city: ICity) => {
+    this.cityChangeSubscription = this.locationService.cityChange.subscribe((city: ICity) => {
       this.city = city;
-      this.loadAll();
+      this.reset();
     });
   }
 

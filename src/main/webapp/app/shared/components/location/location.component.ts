@@ -37,7 +37,7 @@ export class LocationComponent implements OnInit {
       this.cities = response.body!;
       if (this.cities && this.cities.length) {
         this.locationForm.get(['city'])!.setValue(this.cities[0].id);
-        this.locationService.changeCity(this.cities[0]);
+        // this.locationService.changeCity(this.cities[0]);
       }
     });
   }

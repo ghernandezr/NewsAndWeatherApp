@@ -23,10 +23,11 @@ export class NewsUpdateComponent implements OnInit {
   createAtDp: any;
   account!: Account;
   city?: ICity;
+  news?: INews;
 
   editForm = this.fb.group({
-    title: [],
-    description: [],
+    title: ['', [Validators.required]],
+    description: ['', [Validators.required]],
   });
 
   constructor(
@@ -39,6 +40,7 @@ export class NewsUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ news }) => {
+      this.news = news;
       this.updateForm(news);
     });
 
@@ -77,6 +79,7 @@ export class NewsUpdateComponent implements OnInit {
   private createFromForm(): INews {
     return {
       ...new News(),
+      id: this.news && this.news.id ? this.news.id : undefined,
       authorId: this.account.id,
       title: this.editForm.get(['title'])!.value,
       description: this.editForm.get(['description'])!.value,
