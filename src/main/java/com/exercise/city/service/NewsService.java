@@ -1,5 +1,6 @@
 package com.exercise.city.service;
 
+import com.exercise.city.domain.News;
 import com.exercise.city.service.dto.NewsDTO;
 
 import org.springframework.data.domain.Page;
@@ -51,5 +52,5 @@ public interface NewsService {
      * @param cityId The id of the city to be filtered
      * @return
      */
-    List<NewsDTO> findAllByCityId(final String cityId);
+    Page<NewsDTO> findAllByCityId(final String cityId, Pageable pageable);
 }

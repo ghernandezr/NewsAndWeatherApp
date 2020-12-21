@@ -157,7 +157,7 @@ public class NewsResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(news.getId())))
             .andExpect(jsonPath("$.[*].authorId").value(hasItem(DEFAULT_AUTHOR_ID)))
-            .andExpect(jsonPath("$.[*].author_name").value(hasItem(DEFAULT_AUTHOR_NAME)))
+            .andExpect(jsonPath("$.[*].authorName").value(hasItem(DEFAULT_AUTHOR_NAME)))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].cityId").value(hasItem(DEFAULT_CITY_ID)))
@@ -170,12 +170,12 @@ public class NewsResourceIT {
         newsRepository.save(news);
 
         // Get all the newsList
-        restNewsMockMvc.perform(get("/api/news/all/{cityId}", news.getCityId()))
+        restNewsMockMvc.perform(get("/api/news/all/{cityId}?sort=id,desc", news.getCityId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(news.getId())))
             .andExpect(jsonPath("$.[*].authorId").value(hasItem(DEFAULT_AUTHOR_ID)))
-            .andExpect(jsonPath("$.[*].author_name").value(hasItem(DEFAULT_AUTHOR_NAME)))
+            .andExpect(jsonPath("$.[*].authorName").value(hasItem(DEFAULT_AUTHOR_NAME)))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].cityId").value(hasItem(DEFAULT_CITY_ID)))
@@ -193,7 +193,7 @@ public class NewsResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(news.getId()))
             .andExpect(jsonPath("$.authorId").value(DEFAULT_AUTHOR_ID))
-            .andExpect(jsonPath("$.[*].author_name").value(hasItem(DEFAULT_AUTHOR_NAME)))
+            .andExpect(jsonPath("$.authorName").value(DEFAULT_AUTHOR_NAME))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.cityId").value(DEFAULT_CITY_ID))

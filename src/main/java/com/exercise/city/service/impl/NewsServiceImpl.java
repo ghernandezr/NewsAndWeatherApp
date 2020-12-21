@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +51,7 @@ public class NewsServiceImpl implements NewsService {
     public NewsDTO save(NewsDTO newsDTO) {
         log.debug("Request to save News : {}", newsDTO);
         News news = newsMapper.toEntity(newsDTO);
-        news = newsRepository.save(settingNewsAuthorName(news).createAt(LocalDate.now()));
+        news = newsRepository.save(settingNewsAuthorName(news));
         return newsMapper.toDto(news);
     }
 
@@ -101,13 +102,14 @@ public class NewsServiceImpl implements NewsService {
      * @return
      */
     @Override
-    public List<NewsDTO> findAllByCityId(String cityId) {
+    public Page<NewsDTO> findAllByCityId(String cityId, Pageable pageable) {
         log.debug("Request to get all  News : {}", cityId);
-        return newsRepository.findAllByCityId(cityId)
+        List<NewsDTO> newsDTOList = newsRepository.findAllByCityId(cityId, pageable)
             .stream()
             .map(this::settingNewsOwner)
             .map(newsMapper::toDto)
             .collect(Collectors.toList());
+        return new PageImpl<>(newsDTOList, pageable, newsDTOList.size());
     }
 
     private News settingNewsAuthorName(News news) {
@@ -123,7 +125,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     private News settingNewsOwner(News news) {
-        return Optional.ofNullable(news)
+        return Optional.of(news)
             .filter(news1 -> Objects.nonNull(news1.getAuthorId()))
             .map(news1 -> {
                 User user = userService.getCurrenUser();

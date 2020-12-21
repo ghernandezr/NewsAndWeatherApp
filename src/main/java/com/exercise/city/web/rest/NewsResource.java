@@ -99,10 +99,11 @@ public class NewsResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of news in body.
      */
     @GetMapping("/news/all/{cityId}")
-    public ResponseEntity<List<NewsDTO>> getAllNewsByCityId(@PathVariable String cityId) {
+    public ResponseEntity<List<NewsDTO>> getAllNewsByCityId(@PathVariable String cityId, Pageable pageable) {
         log.debug("REST request to get News");
-        List<NewsDTO> newsDTOList = newsService.findAllByCityId(cityId);
-        return ResponseEntity.ok().body(newsDTOList);
+        Page<NewsDTO> newsDTOList = newsService.findAllByCityId(cityId, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), newsDTOList);
+        return ResponseEntity.ok().headers(headers).body(newsDTOList.getContent());
     }
 
     /**
