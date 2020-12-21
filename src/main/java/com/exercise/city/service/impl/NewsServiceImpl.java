@@ -51,7 +51,8 @@ public class NewsServiceImpl implements NewsService {
     public NewsDTO save(NewsDTO newsDTO) {
         log.debug("Request to save News : {}", newsDTO);
         News news = newsMapper.toEntity(newsDTO);
-        news = newsRepository.save(settingNewsAuthorName(news));
+//        news = newsRepository.save(settingNewsAuthorName(news));
+        news = newsRepository.save(news);
         return newsMapper.toDto(news);
     }
 
@@ -110,18 +111,6 @@ public class NewsServiceImpl implements NewsService {
             .map(newsMapper::toDto)
             .collect(Collectors.toList());
         return new PageImpl<>(newsDTOList, pageable, newsDTOList.size());
-    }
-
-    private News settingNewsAuthorName(News news) {
-        return Optional.ofNullable(userService.getCurrenUser())
-            .filter(user -> Objects.nonNull(user.getId()))
-            .map(user -> {
-                News news1 = news.authorName(user.getFirstName() + " " + user.getLastName());
-                if (StringUtils.isEmpty(news.getAuthorId()))
-                    news1.authorId(user.getId());
-                return news1;
-            })
-            .orElse(news);
     }
 
     private News settingNewsOwner(News news) {
